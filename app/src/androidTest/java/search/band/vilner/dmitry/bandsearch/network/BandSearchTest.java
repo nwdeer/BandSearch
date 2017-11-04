@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import java.util.List;
 
 import search.band.vilner.dmitry.bandsearch.network.model.BandDetailsData;
+import search.band.vilner.dmitry.bandsearch.network.model.BandShortInfo;
 import search.band.vilner.dmitry.bandsearch.network.model.ResponseData;
 import search.band.vilner.dmitry.bandsearch.network.model.SearchData;
 
@@ -24,9 +25,9 @@ public class BandSearchTest {
         ResponseData<SearchData> searchResult = service.searchByBandName("Metallica");
         SearchData data = searchResult.data;
         assertNotNull(data);
-        List<SearchData.BandShortInfo> search_results = data.search_results;
+        List<BandShortInfo> search_results = data.search_results;
         assertEquals(1, search_results.size());
-        SearchData.BandShortInfo result = search_results.get(0);
+        BandShortInfo result = search_results.get(0);
         assertNotNull(result.country);
         assertNotNull(result.genre);
         assertNotNull(result.id);
