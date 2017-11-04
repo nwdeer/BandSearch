@@ -29,5 +29,9 @@ dependencies {
 
     //external libs
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.google.code.gson:gson:2.8.2'
+
+    //Only for debug
+    debugCompile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 }
