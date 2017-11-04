@@ -7,6 +7,9 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
+import search.band.vilner.dmitry.bandsearch.network.model.ResponseData;
+import search.band.vilner.dmitry.bandsearch.network.model.SearchData;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
@@ -16,12 +19,12 @@ public class BandSearchTest {
 
     @Test
     public void searchByName() throws Exception {
-        SearchResult searchResult = service.searchByBandName("Metallica");
-        SearchResult.Data data = searchResult.data;
+        ResponseData<SearchData> searchResult = service.searchByBandName("Metallica");
+        SearchData data = searchResult.data;
         assertNotNull(data);
-        List<SearchResult.Result> search_results = data.search_results;
+        List<SearchData.BandShortInfo> search_results = data.search_results;
         assertEquals(1, search_results.size());
-        SearchResult.Result result = search_results.get(0);
+        SearchData.BandShortInfo result = search_results.get(0);
         assertNotNull(result.country);
         assertNotNull(result.genre);
         assertNotNull(result.id);

@@ -11,10 +11,12 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import search.band.vilner.dmitry.bandsearch.BuildConfig;
+import search.band.vilner.dmitry.bandsearch.network.model.ResponseData;
+import search.band.vilner.dmitry.bandsearch.network.model.SearchData;
 
 public class BandService {
     private static final String API_KEY_VALUE = "61a82fc3-9e19-477a-b6d6-23471afd0e35";
-    private static final String API_KEYParameter = "api_key";
+    private static final String API_KEY_PARAMETER = "api_key";
     //hardcoded for now
     private static final String BAND_NAME_PARAMETER = "band_name";
     private BandServiceApi serviceApi;
@@ -42,7 +44,7 @@ public class BandService {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                HttpUrl url = request.url().newBuilder().addQueryParameter(API_KEYParameter, API_KEY_VALUE).build();
+                HttpUrl url = request.url().newBuilder().addQueryParameter(API_KEY_PARAMETER, API_KEY_VALUE).build();
                 request = request.newBuilder().url(url).build();
                 return chain.proceed(request);
             }
@@ -56,9 +58,9 @@ public class BandService {
                 .create(BandServiceApi.class);
     }
 
-    public SearchResult searchByBandName(String searchTerm) throws IOException {
-        Call<SearchResult> search = serviceApi.search(BAND_NAME_PARAMETER, searchTerm);
-        retrofit2.Response<SearchResult> execute = search.execute();
+    public ResponseData<SearchData> searchByBandName(String searchTerm) throws IOException {
+        Call<ResponseData<SearchData>> search = serviceApi.search(BAND_NAME_PARAMETER, searchTerm);
+        retrofit2.Response<ResponseData<SearchData>> execute = search.execute();
         return execute.body();
     }
 
