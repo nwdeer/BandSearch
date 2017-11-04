@@ -18,13 +18,12 @@ import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import search.band.vilner.dmitry.bandsearch.network.model.ResponseData;
-import search.band.vilner.dmitry.bandsearch.network.model.SearchData;
 
 public class BandConverterFactory extends Converter.Factory {
     private static final MediaType REQUEST_MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
 
     private static final Gson gson =  new GsonBuilder()
-            .registerTypeAdapter(ResponseData.class, new GsonTypeAdapter<ResponseData<SearchData>>()).create();
+            .registerTypeAdapter(ResponseData.class, new GsonTypeAdapter<ResponseData>()).create();
 
     @Nullable
     @Override

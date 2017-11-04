@@ -11,6 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import search.band.vilner.dmitry.bandsearch.BuildConfig;
+import search.band.vilner.dmitry.bandsearch.network.model.BandDetailsData;
 import search.band.vilner.dmitry.bandsearch.network.model.ResponseData;
 import search.band.vilner.dmitry.bandsearch.network.model.SearchData;
 
@@ -63,5 +64,11 @@ public class BandService {
         retrofit2.Response<ResponseData<SearchData>> execute = search.execute();
         return execute.body();
     }
+
+    public ResponseData<BandDetailsData> getBandById(String id) throws IOException {
+        Call<ResponseData<BandDetailsData>> getById = serviceApi.getById(id);
+        retrofit2.Response<ResponseData<BandDetailsData>> execute = getById.execute();
+        return execute.body();
+     }
 
 }

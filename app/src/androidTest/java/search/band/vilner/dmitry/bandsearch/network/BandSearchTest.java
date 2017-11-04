@@ -7,11 +7,13 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
+import search.band.vilner.dmitry.bandsearch.network.model.BandDetailsData;
 import search.band.vilner.dmitry.bandsearch.network.model.ResponseData;
 import search.band.vilner.dmitry.bandsearch.network.model.SearchData;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class BandSearchTest {
@@ -29,5 +31,18 @@ public class BandSearchTest {
         assertNotNull(result.genre);
         assertNotNull(result.id);
         assertNotNull(result.name);
+    }
+
+    @Test
+    public void getBandById() throws Exception {
+        ResponseData<BandDetailsData> result = service.getBandById("155");
+        BandDetailsData bandDetailsData = result.data;
+        assertNotNull(bandDetailsData.id);
+        assertNotNull(bandDetailsData.details);
+        assertNotNull(bandDetailsData.details.yearsActive);
+        assertNotNull(bandDetailsData.details.countryOfOrigin);
+        assertNotNull(bandDetailsData.details.genre);
+        assertNotNull(bandDetailsData.discography);
+        assertTrue(bandDetailsData.discography.size() > 0);
     }
 }
