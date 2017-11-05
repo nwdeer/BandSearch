@@ -5,10 +5,14 @@ import android.content.Loader;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import search.band.vilner.dmitry.bandsearch.R;
 import search.band.vilner.dmitry.bandsearch.loader.BandDetailsLoader;
@@ -28,6 +32,7 @@ public class BandDetailsActivity extends AppCompatActivity {
     private TextView bandCountryView;
     private View progressBar;
     private AlbumListAdapter adapter;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +55,7 @@ public class BandDetailsActivity extends AppCompatActivity {
         adapter = new AlbumListAdapter(this, R.layout.album_list_item);
         albumsListView.setAdapter(adapter);
         progressBar = findViewById(R.id.progress_bar);
+        imageView = findViewById(R.id.photo);
     }
 
     LoaderManager.LoaderCallbacks<LoaderResult<BandDetailsData>> callbacks = new LoaderManager.LoaderCallbacks<LoaderResult<BandDetailsData>>() {
@@ -81,5 +87,8 @@ public class BandDetailsActivity extends AppCompatActivity {
         adapter.clear();
         adapter.addAll(data.discography);
         progressBar.setVisibility(View.GONE);
+        if (!TextUtils.isEmpty(data.photo)) {
+            Glide.with(this).load(data.photo).into(imageView);
+        }
     }
 }

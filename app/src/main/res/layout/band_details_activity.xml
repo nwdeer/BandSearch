@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/band_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:padding="@dimen/text_view_padding"
@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/genre"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/years"
         android:padding="@dimen/text_view_padding"
@@ -30,11 +30,19 @@
 
     <TextView
         android:id="@+id/country"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/genre"
         android:padding="@dimen/text_view_padding"
         tools:text="Germany"/>
+
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/text_view_padding"
+        />
 
     <ListView
         android:id="@+id/albums"
