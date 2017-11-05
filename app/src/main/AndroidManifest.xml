@@ -11,14 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.BandSearchActivity">
+        <activity android:name=".ui.BandSearchActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
         </activity>
         <activity android:name=".ui.BandDetailsActivity" />
+
+        <provider
+            android:authorities="search.band.vilner.dmitry.recents.provider.RecentSearchContentProvider"
+            android:name=".provider.RecentSearchContentProvider"/>
     </application>
 
 </manifest>
