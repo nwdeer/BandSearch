@@ -59,6 +59,7 @@ public class BandSearchActivity extends AppCompatActivity {
                 BandShortInfo bandShortInfo = bandsListAdapter.getItem(position);
                 Intent intent = new Intent(BandSearchActivity.this, BandDetailsActivity.class);
                 intent.putExtra(BandDetailsActivity.BAND_ID, bandShortInfo.id);
+                intent.putExtra(BandDetailsActivity.BAND_NAME, bandShortInfo.name);
                 startActivity(intent);
             }
         });
