@@ -21,17 +21,17 @@ public class LoaderResult <T> {
      */
     public Exception exception;
 
-    public LoaderResult(T data) {
+    LoaderResult(T data) {
         this.data = data;
         this.isSuccessful = true;
     }
 
-    public LoaderResult(int errorCode) {
+    LoaderResult(int errorCode) {
         this.errorCode = errorCode;
         this.isSuccessful = false;
     }
 
-    public LoaderResult(Exception exception) {
+    LoaderResult(Exception exception) {
         this.exception = exception;
         this.isSuccessful = false;
     }
