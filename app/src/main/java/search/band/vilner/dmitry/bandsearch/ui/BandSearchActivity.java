@@ -1,10 +1,13 @@
 package search.band.vilner.dmitry.bandsearch.ui;
 
 import android.app.LoaderManager;
+import android.content.Intent;
 import android.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -51,6 +54,15 @@ public class BandSearchActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.band_list_view);
         bandsListAdapter = new BandsListAdapter(this, R.layout.band_list_item);
         listView.setAdapter(bandsListAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                BandShortInfo bandShortInfo = bandsListAdapter.getItem(position);
+                Intent intent = new Intent(BandSearchActivity.this, BandDetailsActivity.class);
+                intent.putExtra(BandDetailsActivity.BAND_ID, bandShortInfo.id);
+                startActivity(intent);
+            }
+        });
     }
 
     private LoaderManager.LoaderCallbacks<LoaderResult<List<BandShortInfo>>> callbacks = new LoaderManager.LoaderCallbacks<LoaderResult<List<BandShortInfo>>>() {
