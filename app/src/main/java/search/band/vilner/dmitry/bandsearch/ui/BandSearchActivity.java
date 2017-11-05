@@ -16,9 +16,9 @@ import search.band.vilner.dmitry.bandsearch.loader.BandListLoader;
 import search.band.vilner.dmitry.bandsearch.loader.LoaderResult;
 import search.band.vilner.dmitry.bandsearch.network.model.BandShortInfo;
 
-public class MainActivity extends AppCompatActivity {
+public class BandSearchActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = BandSearchActivity.class.getSimpleName();
     public static final String SEARCH_TERM = "SearchTerm";
     private BandsListAdapter bandsListAdapter;
     private static final int BAND_SEARCH_LOADER_ID = 1;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Loader<LoaderResult<List<BandShortInfo>>> onCreateLoader(int i, Bundle bundle) {
             String searchTerm = bundle.getString(SEARCH_TERM);
-            return new BandListLoader(MainActivity.this, searchTerm);
+            return new BandListLoader(BandSearchActivity.this, searchTerm);
         }
 
         @Override
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 bandsListAdapter.addAll(result.data);
                 bandsListAdapter.notifyDataSetChanged();
             } else {
-                Toast.makeText(MainActivity.this, "Could not load data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BandSearchActivity.this, "Could not load data", Toast.LENGTH_SHORT).show();
             }
         }
 

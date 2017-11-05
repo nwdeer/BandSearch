@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="search.band.vilner.dmitry.bandsearch.ui.MainActivity">
+    tools:context="search.band.vilner.dmitry.bandsearch.ui.BandSearchActivity">
 
 
     <SearchView
