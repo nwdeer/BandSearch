@@ -54,9 +54,9 @@ public class BandListLoaderTest {
         responseData.data.search_results = expectedSearchData;
         when(service.searchByBandName("searchTerm")).thenReturn(responseData);
         BandListLoader loader = new BandListLoader(RuntimeEnvironment.application, "searchTerm");
-        LoaderResult<List<BandShortInfo>> listLoaderResult = loader.loadInBackground();
+        LoaderResult<SearchData> listLoaderResult = loader.loadInBackground();
         assertTrue(listLoaderResult.isSuccessful);
-        assertEquals(expectedSearchData, listLoaderResult.data);
+        assertEquals(expectedSearchData, listLoaderResult.data.search_results);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class BandListLoaderTest {
         responseData.code = 404;
         when(service.searchByBandName("searchTerm")).thenReturn(responseData);
         BandListLoader loader = new BandListLoader(RuntimeEnvironment.application, "searchTerm");
-        LoaderResult<List<BandShortInfo>> listLoaderResult = loader.loadInBackground();
+        LoaderResult<SearchData> listLoaderResult = loader.loadInBackground();
         assertFalse(listLoaderResult.isSuccessful);
         assertEquals(404, listLoaderResult.errorCode);
     }
@@ -74,7 +74,7 @@ public class BandListLoaderTest {
     public void OnExceptionCodeReturnsErrorResult() throws IOException {
         when(service.searchByBandName("searchTerm")).thenThrow(new IOException());
         BandListLoader loader = new BandListLoader(RuntimeEnvironment.application, "searchTerm");
-        LoaderResult<List<BandShortInfo>> listLoaderResult = loader.loadInBackground();
+        LoaderResult<SearchData> listLoaderResult = loader.loadInBackground();
         assertFalse(listLoaderResult.isSuccessful);
         assertTrue(listLoaderResult.exception.getClass().getName().equals(IOException.class.getName()));
     }

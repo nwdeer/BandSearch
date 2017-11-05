@@ -12,12 +12,11 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import search.band.vilner.dmitry.bandsearch.R;
 import search.band.vilner.dmitry.bandsearch.loader.BandListLoader;
 import search.band.vilner.dmitry.bandsearch.loader.LoaderResult;
 import search.band.vilner.dmitry.bandsearch.network.model.BandShortInfo;
+import search.band.vilner.dmitry.bandsearch.network.model.SearchData;
 
 public class BandSearchActivity extends AppCompatActivity {
 
@@ -65,18 +64,18 @@ public class BandSearchActivity extends AppCompatActivity {
         });
     }
 
-    private LoaderManager.LoaderCallbacks<LoaderResult<List<BandShortInfo>>> callbacks = new LoaderManager.LoaderCallbacks<LoaderResult<List<BandShortInfo>>>() {
+    private LoaderManager.LoaderCallbacks<LoaderResult<SearchData>> callbacks = new LoaderManager.LoaderCallbacks<LoaderResult<SearchData>>() {
         @Override
-        public Loader<LoaderResult<List<BandShortInfo>>> onCreateLoader(int i, Bundle bundle) {
+        public Loader<LoaderResult<SearchData>> onCreateLoader(int i, Bundle bundle) {
             String searchTerm = bundle.getString(SEARCH_TERM);
             return new BandListLoader(BandSearchActivity.this, searchTerm);
         }
 
         @Override
-        public void onLoadFinished(Loader<LoaderResult<List<BandShortInfo>>> loader, LoaderResult<List<BandShortInfo>> result) {
+        public void onLoadFinished(Loader<LoaderResult<SearchData>> loader, LoaderResult<SearchData> result) {
             bandsListAdapter.clear();
             if (result.isSuccessful) {
-                bandsListAdapter.addAll(result.data);
+                bandsListAdapter.addAll(result.data.search_results);
                 bandsListAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(BandSearchActivity.this, "Could not load data", Toast.LENGTH_SHORT).show();
@@ -84,7 +83,7 @@ public class BandSearchActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onLoaderReset(Loader<LoaderResult<List<BandShortInfo>>> loader) {
+        public void onLoaderReset(Loader<LoaderResult<SearchData>> loader) {
         }
     };
 }
